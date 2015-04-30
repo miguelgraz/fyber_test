@@ -9,12 +9,12 @@ describe FyberCli do
 
   it "stores the informed custom parameters" do
     expect(FyberCli::PARAMS[:uid]).to be_nil
-    post '/custom_params', {uid: 'player5', pub0: 'campaign5', page: 5}
+    post '/custom_params', {uid: 'player5', pub0: 'campaign5', page: 1}
     expect(FyberCli::PARAMS[:uid]).to eq 'player5'
   end
 
   it "receives custom parameters and does the request" do
-    post '/custom_params', {uid: 'player5', pub0: 'campaign5', page: 5}
+    post '/custom_params', {uid: 'player5', pub0: 'campaign5', page: 1}
     expect(last_response).to be_redirect
     follow_redirect!
     expect(last_request.path).to eq('/request')
