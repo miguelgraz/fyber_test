@@ -1,1 +1,10 @@
-<%= @offers %>
+<%= 'No offers available' if @offers.empty? %>
+<% @offers.each do |offer| %>
+  <strong>Title:</strong> <%= offer[:title] %><br>
+  <strong>Payout:</strong> <%= offer[:payout] %><br>
+  <img src="<%= offer[:thumb] %>" height='60' width='60'>
+  <hr>
+<% end %>
+<br>
+
+<a href="/">Request with different parameters!</a>
