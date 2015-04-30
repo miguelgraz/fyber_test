@@ -21,20 +21,16 @@ class FyberCli < Sinatra::Base
   end
 
   post '/custom_params' do
-    @uid = params['uid']
-    @pub0 = params['pub0']
-    @page = params['page']
+    PARAMS[:uid] = params['uid']
+    PARAMS[:pub0] = params['pub0']
+    PARAMS[:page] = params['page']
 
-    PARAMS[:uid] = @uid
-    PARAMS[:pub0] = @pub0
-    PARAMS[:page] = @page
-    PARAMS[:hashkey] = hashkey
     redirect '/request'
   end
 
   get '/request' do
     uri = URI(URL)
-    uri.query = URI.encode_www_form(PARAMS)
+    uri.query = URI.encode_www_form(PARAMS.merge({hashkey: hashkey}))
     res = Net::HTTP.get_response(uri)
     res.body
   end
