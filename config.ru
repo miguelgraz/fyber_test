@@ -1,2 +1,2 @@
 require './fyber'
-run Sinatra::Application
+run FyberCli
