@@ -1,6 +1,6 @@
 <form action="custom_params" method="post">
-  User ID: <input type="text" name="uid"><br>
-  Custom Parameter (pub0): <input type="text" name="pub0"><br>
-  Page: <input type="number" name="page"><br>
+  User ID: <input type="text" name="uid" value="<%= PARAMS[:uid] %>"><br>
+  Custom Parameter (pub0): <input type="text" name="pub0" value="<%= PARAMS[:pub0] %>"><br>
+  Page: <input type="number" name="page" value="<%= PARAMS[:page] %>"><br>
   <input type="submit" value="Submit">
 </form>
