@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'net/http'
 require 'json'
 
 class FyberCli < Sinatra::Base
