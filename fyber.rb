@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 
 class FyberCli < Sinatra::Base
   URL = 'http://api.sponsorpay.com/feed/v1/offers.json'
@@ -30,7 +31,14 @@ class FyberCli < Sinatra::Base
     uri = URI(URL)
     uri.query = URI.encode_www_form(PARAMS.merge({hashkey: hashkey}))
     res = Net::HTTP.get_response(uri)
-    res.body
+    response = JSON.parse(res.body)
+    if response['code'] != 'OK'
+      @message = response['message']
+      erb :index
+    else
+      @offers = response['offers'].map{|offer| {title: offer['title'], thumb: offer['thumbnail']['lowres'], payout: offer['payout']} }
+      erb :offers
+    end
   end
 
   def hashkey
